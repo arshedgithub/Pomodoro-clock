@@ -13,14 +13,14 @@
 </head>
 
 <body>
-    <h1 class="text-center my-4 text-light">Pomodoro-clock</h1>
+    <h1 class="text-center my-3 text-light">Pomodoro-clock</h1>
     <div class="content m-auto p-5 bg-secondary">
         <div class="row setTimer g-2 mb-5">
             <div class="col d-flex flex-column bd-highlight">
                 <div class="bd-highlight"><b>&nbsp;&nbsp;Set Session Time</b> </div>
                 <div class="d-flex flex-row bd-highlight">
                     <button onclick="sessionUp()" class="px-3 bd-highlight sessionUp">+</button>
-                    <div class="session px-3 bd-highlight bg-white border border-1">25</div>
+                    <div class="session px-3 bd-highlight bg-white border border-1">01</div>
                     <button onclick="sessionDown()" class="px-3 bd-highlight sessionDown">-</button>
                 </div>
             </div>
@@ -42,11 +42,13 @@
         </div>
 
         <div class="btns text-center m-auto my-3">
-            <button class="go col-sm-2 p-1">Go</button>
-            <button class="reset col-sm-2 p-1">Reset</button>
+            <button onclick="startSession()" class="go col-sm-2 p-1">Go</button>
+            <button onclick="stopTimer()" class="pause col-sm-2 p-1">Pause</button>
+            <button onclick="resetTimer()" class="reset col-sm-2 p-1">Reset</button>
         </div>
     </div>
 
+    <p class="author text-center text-light my-2">code & design by Arshed Ahmed</p>
     <script src="app.js"></script>
 </body>
 
