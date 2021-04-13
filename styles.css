@@ -1,0 +1,16 @@
+body{
+    background-color: rgb(44, 51, 49);
+}
+.content{
+    border-radius: 4vh;
+    max-width: 550px;
+}
+.container{
+    border-radius: 20vh;
+    background-color: rgb(75, 75, 151);
+}
+.clock{
+    border-radius: 14vh;
+    font-size: 13vh;
+    font-family: 'Times New Roman', Times, serif;
+}
