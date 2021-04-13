@@ -3,7 +3,7 @@ body{
 }
 .content{
     border-radius: 4vh;
-    max-width: 500px;
+    max-width: 600px;
 }
 .container{
     border-radius: 20vh;
@@ -18,7 +18,7 @@ body{
     font-family: cursive;
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 600px){
     body{
         padding: 1.5vh;
     }
