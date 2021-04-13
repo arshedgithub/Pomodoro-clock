@@ -14,8 +14,10 @@ let sessionTimer;
 let intervalTimer;
 let current;
 
+pause.style.display = 'none';    
+
 const sessionDown = () => {
-    if (currentSession == 0) {
+    if (currentSession == 1) {
         return;
     }
     currentSession--;
@@ -33,7 +35,7 @@ const sessionUp = () => {
 }
 
 const intervalDown = () => {
-    if (currentInterval == 0) {
+    if (currentInterval == 1) {
         return;
     }
     currentInterval--;
@@ -56,11 +58,9 @@ date.setSeconds(0);
 date.setMinutes(1);
 
 const startSession = () => {
-    min.innerHTML = currentSession;
-    
     sessionTimer = setInterval(() => {
         // handling seconds
-        second = date.getSeconds()
+        let second = date.getSeconds()
         second++;
         date.setSeconds(second);
         let s = 60-second;
@@ -68,59 +68,49 @@ const startSession = () => {
         sec.innerHTML = s;
         
         // handling minutes
-        minute = date.getMinutes()
+        let minute = date.getMinutes()
         let m = currentSession-minute;        
         m = m.toString().length == 1 ? '0'+m : m;   // keep length as 2
         min.innerHTML = m;
         date.setMinutes(minute);
+
+        if (s == '00') {
+            startInterval();
+        }
     },1000);
     
     container.style.backgroundColor = 'rgb(159, 253, 51)';
-    
-    // if (go.textContent == 'Go') {
-    //     btns.innerHTML = `
-    //         <button onclick="stopTimer()" class="pause col-sm-2 p-1">Pause</button>
-    //         <button onclick="resetTimer()" class="reset col-sm-2 p-1">Reset</button>
-    //     `; 
-    //     return;   
-    // }
-    // if (pause.textContent == 'Pause') {
-    //     btns.innerHTML = `
-    //         <button onclick="startSession()" class="go col-sm-2 p-1">Go</button>
-    //         <button onclick="resetTimer()" class="reset col-sm-2 p-1">Reset</button>
-    //     `;
-    //     return;
-    // }
-    
+    go.style.display = 'none';    
+    pause.style.display = 'inline';    
 }
  
 const startInterval = () => {
-    min.innerHTML = currentInterval;
-    
     intervalTimer = setInterval(() => {
         // handling seconds
-        second = date.getSeconds()
-        second++;
+        let second = date.getSeconds()
+        // second++;
+        console.log(second);
         date.setSeconds(second);
         let s = 60-second;
         s = s.toString().length == 1 ? '0'+s : s;   // keep length as 2
         sec.innerHTML = s;
         
         // handling minutes
-        minute = date.getMinutes()
+        let minute = date.getMinutes()
+        date.setMinutes(minute);
         let m = currentInterval-minute;        
         m = m.toString().length == 1 ? '0'+m : m;   // keep length as 2
         min.innerHTML = m;
-        date.setMinutes(minute);
     },1000);
     
-    container.style.backgroundColor = 'rgb(220, 53, 51)';
-    
+    container.style.backgroundColor = 'rgb(180, 83, 51)';
 }
 
 const stopTimer = () => {
     clearInterval(sessionTimer);
     clearInterval(intervalTimer);
+    pause.style.display = 'none';    
+    go.style.display = 'inline';    
 }
 
 const resetTimer = () => {
