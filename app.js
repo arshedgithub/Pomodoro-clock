@@ -1,10 +1,10 @@
-const session = document.querySelector(".session");
+const session = document.querySelector(".session");  
 const interval = document.querySelector(".interval");
 const container = document.querySelector(".container");
 const btns = document.querySelector(".btns");
-const go = document.querySelector(".go");
-const pause = document.querySelector(".pause");
-const reset = document.querySelector(".reset");
+const go = document.querySelector(".go");        // go button 
+const pause = document.querySelector(".pause");  // pause button
+const reset = document.querySelector(".reset");  // reset button
 const min = document.querySelector(".min");
 const sec = document.querySelector(".sec");
 
@@ -16,7 +16,8 @@ let current;
 
 pause.style.display = 'none';    
 
-const sessionDown = () => {
+// decrease the session time 
+const sessionDown = () => {    
     if (currentSession == 1) {
         return;
     }
@@ -25,6 +26,7 @@ const sessionDown = () => {
     session.innerHTML = currentSession;
 }
 
+// increase the session time
 const sessionUp = () => {
     if (currentSession == 60) {
         return;
@@ -34,6 +36,7 @@ const sessionUp = () => {
     session.innerHTML = currentSession;
 }
 
+// decrease the interval time
 const intervalDown = () => {
     if (currentInterval == 1) {
         return;
@@ -43,6 +46,7 @@ const intervalDown = () => {
     interval.innerHTML = currentInterval;
 }
 
+// increase the interval time
 const intervalUp = () => {
     if (currentInterval == 60) {
         return;
@@ -55,27 +59,34 @@ const intervalUp = () => {
 
 const date = new Date();
 date.setSeconds(0);
-date.setMinutes(1);
+date.setMinutes(0);
 
 const startSession = () => {
+    const sessionTime = currentSession;
     sessionTimer = setInterval(() => {
         // handling seconds
-        let second = date.getSeconds()
+        let second = date.getSeconds();
         second++;
         date.setSeconds(second);
-        let s = 60-second;
+        
+        let s = 60-(second);
         s = s.toString().length == 1 ? '0'+s : s;   // keep length as 2
         sec.innerHTML = s;
         
         // handling minutes
-        let minute = date.getMinutes()
-        let m = currentSession-minute;        
+        let minute = date.getMinutes();
+        
+        let m = sessionTime-(minute+1);        
         m = m.toString().length == 1 ? '0'+m : m;   // keep length as 2
         min.innerHTML = m;
-        date.setMinutes(minute);
-
-        if (s == '00') {
-            startInterval();
+        
+        if (s == '01' && m == '00') {
+            setTimeout(() => {
+                clearInterval(sessionTimer);
+                sec.innerHTML = '00';
+                min.innerHTML = currentInterval;
+                startInterval();
+            }, 1000);
         }
     },1000);
     
@@ -85,27 +96,37 @@ const startSession = () => {
 }
  
 const startInterval = () => {
+    const intervalTime = currentInterval;
     intervalTimer = setInterval(() => {
         // handling seconds
-        let second = date.getSeconds()
-        // second++;
-        console.log(second);
+        let second = date.getSeconds();
+        second++;
         date.setSeconds(second);
-        let s = 60-second;
+        
+        let s = 60-(second);
         s = s.toString().length == 1 ? '0'+s : s;   // keep length as 2
         sec.innerHTML = s;
         
         // handling minutes
-        let minute = date.getMinutes()
-        date.setMinutes(minute);
-        let m = currentInterval-minute;        
+        let minute = date.getMinutes();
+        
+        let m = intervalTime-(minute);        
         m = m.toString().length == 1 ? '0'+m : m;   // keep length as 2
         min.innerHTML = m;
+        
+        if (s == '01' && m == '00') {
+            setTimeout(() => {
+                resetTimer();
+                startSession();
+            }, 1000);
+        }
     },1000);
     
-    container.style.backgroundColor = 'rgb(180, 83, 51)';
+    container.style.backgroundColor = 'rgb(249, 153, 51)';
+    go.style.display = 'none';    
+    pause.style.display = 'inline';    
 }
-
+  
 const stopTimer = () => {
     clearInterval(sessionTimer);
     clearInterval(intervalTimer);
@@ -118,6 +139,6 @@ const resetTimer = () => {
     sec.innerHTML = '00';
     min.innerHTML = '00';
     date.setSeconds(0);
-    date.setMinutes(1);
-
+    date.setMinutes(0);
+    container.style.backgroundColor = 'rgb(75, 75, 151)';    
 }

@@ -3,7 +3,7 @@ body{
 }
 .content{
     border-radius: 4vh;
-    max-width: 560px;
+    max-width: 500px;
 }
 .container{
     border-radius: 20vh;
@@ -13,4 +13,17 @@ body{
     border-radius: 14vh;
     font-size: 13vh;
     font-family: 'Times New Roman', Times, serif;
+}
+.author{
+    font-family: cursive;
+}
+
+@media screen and (max-width: 500px){
+    body{
+        padding: 1.5vh;
+    }
+    .clock{
+        font-size: 7vh;
+        /* padding: 1vh; */
+    }
 }
