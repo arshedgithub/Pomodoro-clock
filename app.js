@@ -135,6 +135,7 @@ const stopTimer = () => {
 }
 
 const resetTimer = () => {
+    window.alert("This will reset the clock")
     stopTimer();
     sec.innerHTML = '00';
     min.innerHTML = '00';
